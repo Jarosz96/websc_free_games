@@ -1,0 +1,6 @@
+csv
+beautifulsoup4
+requests
+python-dotenv
+tkinter
+Pillow
