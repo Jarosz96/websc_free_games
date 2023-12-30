@@ -26,7 +26,7 @@ def main():
     os.chdir(file_directory)
 
     # Fetch the webpage content
-    base_url = requests.get('https://gg.deals/deals/?maxPrice=0&minRating=3')
+    base_url = requests.get('https://gg.deals/deals/?minDiscount=100&minRating=0&type=1')
     soup = BeautifulSoup(base_url.content, 'html.parser')
 
     games_info = []
@@ -48,11 +48,11 @@ def main():
     # Create set of existing game titles to avoid duplicates
     existing_titles = {row['game'] for row in existing_rows}
 
-    game_containers = soup.find_all('div', {'class': 'd-flex flex-wrap relative list-items shadow-box-small-lighter'})
+    game_containers = soup.find_all('div', class_='hoverable-box')
 
     # Iterate through each game container
     for game in game_containers:
-        game_title_tag = game.find('a', class_='game-info-title title')
+        game_title_tag = game.find('a', class_='game-info-title')
         launcher_tag = game.find('svg', class_=lambda x: x and 'svg-icon-drm-' in x)
         end_date_tag = game.find('time', class_='timesince')
 
