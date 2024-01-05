@@ -62,9 +62,10 @@ def main():
 
             launcher_class = launcher_tag.get('class', [])
             launcher_name = 'Unknown'
+            prefix = 'svg-icon-drm-'
             for class_name in launcher_class:
-                if 'svg-icon-drm-' in class_name:
-                    launcher_name = class_name.split('-')[-1]
+                if prefix in class_name:
+                    launcher_name = class_name.replace(prefix, '').replace('-', ' ').title()  # Use .title() to capitalize each word
                     break
             
             # Convert end_date to ISO format
